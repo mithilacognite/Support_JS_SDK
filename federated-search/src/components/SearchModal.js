@@ -17,8 +17,8 @@ function SearchModal({ setOpenModal }) {
         setToggleState(index);
     };
     const searchClient = algoliasearch(
-        '4V76MEJWBS',
-        'e88572943e4223a40675745152733a61'
+        '#######',
+        '#############'
       );
 
     const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => (
