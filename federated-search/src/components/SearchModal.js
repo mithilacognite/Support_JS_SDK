@@ -2,13 +2,18 @@ import { useState } from "react";
 import "./Modal.css";
 import { connectSearchBox } from 'react-instantsearch-dom';
 import { connectPagination } from 'react-instantsearch-dom';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
+import GroupIcon from '@mui/icons-material/Group';
 import { connectHits } from 'react-instantsearch-dom';
+import { Scrollbar } from "react-scrollbars-custom";
+
 import {
     InstantSearch,
     Index,
+    Configure
     
   } from 'react-instantsearch-dom';
-  import algoliasearch from 'algoliasearch/lite';
 
 function SearchModal({ setOpenModal }) {
     const [toggleState, setToggleState] = useState(1);
@@ -16,29 +21,15 @@ function SearchModal({ setOpenModal }) {
     const toggleTab = (index) => {
         setToggleState(index);
     };
-    const searchClient = algoliasearch(
-        '#######',
-        '#############'
-      );
-
-    const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => (
-        <form noValidate action="" role="search">
-          <input
-            type="search"
-            value={currentRefinement}
-            onChange={event => refine(event.currentTarget.value)}
-          />
-          
-        </form>
-    );
-    const CustomSearchBox = connectSearchBox(SearchBox);
-
-    const Hits = ({ hits }) => (
-        <ol>
+  const Hits = ({ hits }) => (
+      
+        <ol >
           {hits.map(hit => (
-            <li key={hit.objectID}>{hit.title}</li>
+            <li className="results" onClick={()=>{window.location.href=hit.url}} key={hit.objectID}><button>{hit.title}</button></li>
           ))}
+          
         </ol>
+      
       );
       
     const CustomHits = connectHits(Hits);
@@ -52,7 +43,7 @@ function SearchModal({ setOpenModal }) {
             };
       
             return (
-              <li key={index}>
+              <li className="pagination" key={index}>
                 <a
                   href={createURL(page)}
                   style={style}
@@ -75,24 +66,30 @@ function SearchModal({ setOpenModal }) {
     return (
         <div className="modalBackground">
             <div className="modalContainer">
-            <InstantSearch indexName="crawler_Docs" searchClient={searchClient}> 
+            <Scrollbar style={{ color:"black"}}>
+            {/* <InstantSearch indexName="crawler_Docs" searchClient={searchClient}>  */}
                 <div className="bloc-tabs">
                     <button
                     className={toggleState === 1 ? "tabs active-tabs" : "tabs"}
                     onClick={() => toggleTab(1)}
                     >
-                    Docs
+                    <LibraryBooksIcon/> Docs
                     </button>
                     <button
                     className={toggleState === 2 ? "tabs active-tabs" : "tabs"}
                     onClick={() => toggleTab(2)}
                     >
-                    Learn
+                    <QueryStatsIcon/> Learn
                     </button>
-                    <header className="searchbar">
-                            <CustomSearchBox  />
-                    </header>
-                    <div className="titleCloseBtn">
+
+                    <button
+                    className={toggleState === 3 ? "tabs active-tabs" : "tabs"}
+                    onClick={() => toggleTab(3)}
+                    >
+                    <GroupIcon/> Hub
+                    </button>
+                    
+                    {/* <div className="titleCloseBtn">
                         <button
                             onClick={() => {
                             setOpenModal(false);
@@ -100,32 +97,39 @@ function SearchModal({ setOpenModal }) {
                         >
                             X
                         </button>
-                    </div>
-                </div>
+                    </div> */}
+                  </div>
                     
                     
-                    
+                  
                     <div
                         className={toggleState === 1 ? "content  active-content" : "content"}
                         >
                         <Index indexName="crawler_Docs">
-                            <div className="body">
+                          
+                                {/* <Configure hitsPerPage={10} /> */}
                                 <CustomHits/>
                                 {/* <CustomPagination/> */}
-                            </div>
+                            
                         </Index>
                     </div>
                     <div
                         className={toggleState === 2 ? "content  active-content" : "content"}
                         >
                         <Index indexName="crawler_Learn">
-                            <div className="body">
-                                <CustomHits/>
-                                {/* <CustomPagination/> */}
-                            </div>
+                          <CustomHits/>
                         </Index>
                     </div>
-            </InstantSearch>
+
+                    <div
+                        className={toggleState === 3 ? "content  active-content" : "content"}
+                        >
+                        <Index indexName="crawler_Cognite_Hub">
+                                <CustomHits/>
+                        </Index>
+                    </div>
+                    </Scrollbar>
+            {/* </InstantSearch> */}
                     
             </div>
         </div>
