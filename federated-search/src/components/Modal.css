@@ -2,101 +2,55 @@
     width: 100vw;
     height: 100vh;
     background-color: transparent;
-    backdrop-filter: blur(10px);
+    /* backdrop-filter: blur(10px); */
     position: fixed;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center; */
+    /* align-items: center; */
   }
   
   .modalContainer {
-    width: 75%;
+    width: 50%;
     height: 80%;
-    border-radius: 12px;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    color: white;
+    /* margin-top: 26%; */
+    margin-left: 50%;
+    margin-right: 5%;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    background-color: rgba(128, 128, 128, 0.342);
     display: flex;
     flex-direction: column;
-    padding: 30px;
+    align-items: flex-start;
+    /* overflow-y: scroll; */
   }
   .searchbar{
     display: inline-block;
     text-align: center;
   }
-  
-  .modalContainer .title {
-    display: inline-block;
-    text-align: center;
-    margin-top: 1px;
-  }
-  
-  .titleCloseBtn {
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  .titleCloseBtn button {
-    background-color: transparent;
-    border: none;
-    font-size: 25px;
-    cursor: pointer;
-  }
-  
-  .modalContainer .body {
-    /* flex: 50%;
-    display: flex; */
-    justify-content: center;
-    align-items: center;
-    font-size: 1.7rem;
-    text-align: center;
-    overflow-y: auto;
-  }
-  
-  .modalContainer .footer {
-    flex: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modalContainer .footer button {
-    width: 150px;
-    height: 45px;
-    margin: 10px;
-    border: none;
-    background-color: cornflowerblue;
-    color: white;
-    border-radius: 8px;
-    font-size: 20px;
-    cursor: pointer;
-  }
-  
-  #cancelBtn {
-    background-color: crimson;
-  }
-
-
   .bloc-tabs {
     display: flex;
+    position: fixed;
+    z-index: 1;
+    width: 45%;
   }
   .tabs {
-  
+    width: 33%;
+    color: black;
     padding: 15px;
     text-align: center;
-    width: 50%;
-    background: rgba(128, 128, 128, 0.075);
+    /* background: white; */
     cursor: pointer;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.274);
+    border-bottom: 1px solid rgba(255, 253, 253, 0.274);
     box-sizing: content-box;
-    position: relative;
+    /* position: relative; */
     outline: none;
-  }
-  .tabs:not(:last-child){
-    border-right: 1px solid rgba(0, 0, 0, 0.274);
+    font-size: 15px;
+    
   }
   
   .active-tabs  {
-    background: white;
+    background: gray;
     border-bottom: 1px solid transparent;
   }
   
@@ -109,8 +63,71 @@
     transform: translateX(-50%);
     width: calc(100% + 2px);
     height: 5px;
-    background: rgb(88, 147, 241);
   }
+
+  .content-tabs {
+    flex-grow : 1;
+    
+  }
+  .content {
+    padding-top: 100px;
+    padding: 5px;
+    width: 90%;
+    height: 80%;
+    display: none;
+    color: white;
+    margin-top: 8%;
+    
+  }
+  .content h2 {
+    padding: 0px 0 5px 0px;
+  }
+  .content hr {
+    width: 100px;
+    height: 2px;
+    background: #222;
+    margin-bottom: 5px;
+  }
+  .content p {
+    width: 100%;
+    height: 80%;
+  }
+  .active-content {
+    display: block;
+  }
+
+.pagination{
+    display: inline-block;
+    padding: 0.5em;
+}
+
+.content .results{
+  width : 90%;
+  height: 30px;
+  padding-left: 80px;
+  color: black;
+  background-color: white;
+  border-radius: 6px;
+  border: black;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  justify-content: center;
+  line-height: 10px;
+  overflow: hidden;
+}
+
+.content .results button{
+  background-color: white;
+  border: none;
+  justify-self: center;
+  font-size: 15px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+  
+
+  
 
 
   
